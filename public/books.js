@@ -27,3 +27,27 @@ function fetchCategories(callback) {
     xhr.send();
 
 }
+
+function fetchBooks(category, callback) {
+
+    var xhr = new XMLHttpRequest();
+    var query = new URLSearchParams({
+        format: format,
+        type: 'filter',
+        category: category
+    }).toString()
+
+    xhr.open('GET', 'booklist.php?' + query)
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            return callback(
+                    parse(xhr, format, 'book')
+                    );
+        }
+        console.log('Request failed: ' + xhr.status);
+    };
+
+    xhr.send();
+
+}

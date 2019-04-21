@@ -71,6 +71,19 @@ function parse(xhr, format, tagName) {
     return result;
 }
 
+fetchCategories(function (data) {
+
+    var html = '';
+    data.forEach(item => {
+        
+	console.log(item);
+        var categoryHTML = '<label>';
+        categoryHTML += '<input type="radio" name="category" value="' + item.name + '"/>'
+        categoryHTML += item.name + '</label>';
+
+        html += categoryHTML;
+    })
+
     document.getElementById('categories').innerHTML = html;
 
 })

@@ -74,3 +74,22 @@ function parse(xhr, format, tagName) {
     document.getElementById('categories').innerHTML = html;
 
 })
+
+document.getElementById('filter').addEventListener('click', function () {
+    var category = document.querySelector('input:checked');
+    fetchBooks(category.value, function (data) {
+
+        var html = '<h3>Books in category "' + category.value + '"</h3><ul>';
+        data.forEach(item => {
+            console.log(item);
+            var text = item.title + ', by ' + item.author + ' (' + item.year + ')';
+
+            html += '<li>' + text + '</li>';
+        })
+        html += '</ul>';
+        document.getElementById('books').innerHTML = html;
+
+
+    })
+
+})

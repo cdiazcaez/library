@@ -70,6 +70,7 @@ function parse(xhr, format, tagName) {
 
     return result;
 }
+
     document.getElementById('categories').innerHTML = html;
 
 })

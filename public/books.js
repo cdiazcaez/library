@@ -51,3 +51,22 @@ function fetchBooks(category, callback) {
     xhr.send();
 
 }
+
+function parse(xhr, format, tagName) {
+
+    if (format === 'json')
+        return JSON.parse(xhr.responseText);
+
+    var items = xhr.responseXML.getElementsByTagName(tagName);
+    var result = [];
+    for (i = 0; i < items.length; i++) {
+        var item = {};
+        items[i].childNodes.forEach(function (tag) {
+            console.log(tag.tagName);
+            item[tag.tagName] = tag.textContent;
+        })
+        result.push(item);
+    }
+
+    return result;
+}

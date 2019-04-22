@@ -37,3 +37,21 @@ if($_GET["type"] === "filter" && !empty($_GET["category"])) {
 
 	$data = $book->fetchByCategory($_GET["category"]);
 
+	if($_GET["format"] === "json") {
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	} else {
+		header('Content-Type: text/xml');
+		$xml_data = new SimpleXMLElement('<?xml version="1.0"?><books></books>');
+		array_to_xml($data, "book", $xml_data);
+		echo $xml_data->asXML();
+	}
+
+	exit;
+}
+
+
+http_response_code(400);
+
+?>
+

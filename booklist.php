@@ -15,3 +15,8 @@ function array_to_xml( $data, $key, &$xml_data ) {
         }
      }
 }
+
+
+if(!isset($_GET["type"]) || $_GET["type"] == 'categories') {
+
+	$data = $book->listCategories();

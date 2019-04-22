@@ -31,3 +31,9 @@ if(!isset($_GET["type"]) || $_GET["type"] == 'categories') {
 	}
 	exit;
 }
+
+
+if($_GET["type"] === "filter" && !empty($_GET["category"])) {
+
+	$data = $book->fetchByCategory($_GET["category"]);
+

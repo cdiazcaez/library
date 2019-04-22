@@ -20,3 +20,14 @@ function array_to_xml( $data, $key, &$xml_data ) {
 if(!isset($_GET["type"]) || $_GET["type"] == 'categories') {
 
 	$data = $book->listCategories();
+	if($_GET["format"] === "json") {
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	} else {
+		header('Content-Type: text/xml');
+		$xml_data = new SimpleXMLElement('<?xml version="1.0"?><categories></categories>');
+		array_to_xml($data, "category", $xml_data);
+		echo $xml_data->asXML();
+	}
+	exit;
+}

@@ -66,3 +66,8 @@ class Book {
 
 
 			return $this->conn->commit();
+
+} catch(Exception $e) {
+			//An exception has occured, which means that one of our database queries failed.
+			//Print out the error message.
+			echo $e->getMessage();

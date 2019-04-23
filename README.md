@@ -1,4 +1,5 @@
-###################
+# Database .sql files
+
 dump.sql contains the DB structure empty
 
 books.sql contains both the DB structure and Data
@@ -11,7 +12,8 @@ After you have created the database, using `dump.sql` run the following command:
 php seed.php
 ```
 This command should be executed once. 
-##############################
+
+# Credentials 
 
 Note: Credentials to reach DB are in connection.php file 
 

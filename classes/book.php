@@ -37,3 +37,32 @@ class Book {
 
 		return $books;
 	}
+
+	public function add($book) {
+
+		try {
+
+			$this->conn->beginTransaction();
+
+			$stmt = $this->conn->prepare("INSERT INTO book (title) VALUES (:title)");
+			$stmt->execute([
+				$book["title"]		
+			]);
+
+			$stmt = $this->conn->prepare("SET @bookId = LAST_INSERT_ID();");
+			$stmt->execute();
+
+			$stmt = $this->conn->prepare("INSERT INTO book_category (book, category) VALUES (@bookId, :category)");
+			$stmt->execute([ $book["category"] ]);
+
+			$stmt = $this->conn->prepare("INSERT INTO book_year (book, year) VALUES (@bookId, :year)");
+			$stmt->execute([ $book["year"] ]);
+
+			$stmt = $this->conn->prepare("INSERT INTO book_author (book, author) VALUES (@bookId, :author)");
+			$stmt->execute([ $book["author"] ]);
+
+			$stmt = $this->conn->prepare("INSERT INTO book_price (book, price) VALUES (@bookId, :price)");
+			$stmt->execute([ $book["price"] ]);
+
+
+			return $this->conn->commit();

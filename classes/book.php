@@ -10,3 +10,13 @@ class Book {
 		$this->conn = Database::getConnection();		
 	}
 
+	public function listCategories() {
+
+		$stmt = $this->conn->prepare("SELECT * FROM categories");
+
+		$stmt->execute();
+
+		$categories = $stmt->fetchAll();
+
+		return $categories;
+	}

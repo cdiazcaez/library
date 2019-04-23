@@ -71,3 +71,22 @@ class Book {
 			//An exception has occured, which means that one of our database queries failed.
 			//Print out the error message.
 			echo $e->getMessage();
+
+
+
+			//Rollback the transaction.
+			$this->conn->rollBack();
+
+			return false;
+		}
+
+	}
+
+	public function addCategory($category) {
+
+		$stmt = $this->conn->prepare("INSERT INTO categories (name) VALUES (?)");
+		$stmt->execute([ $category ]);
+
+	}
+
+}
